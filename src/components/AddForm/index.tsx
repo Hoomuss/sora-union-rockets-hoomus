@@ -1,21 +1,14 @@
+import { IUser } from "@/models/response";
+import { useState } from "react";
+import { SearchUser } from "../SearchUser";
 import styles from "./AddForm.module.scss";
-import { Octokit } from "@octokit/core";
-import { useEffect } from "react";
-import { URL } from "@/consts/index";
 
 export const AddForm = () => {
-  const requestItems = async (query: string) => {
-    const octokit = new Octokit({
-      auth: URL,
-    });
-
-    const { data } = await octokit.request("GET /search/users", { q: query });
-    return data;
-  };
-  useEffect(() => {
-    requestItems("ufoBeliever").then((e) => {
-      console.log(e);
-    });
-  }, []);
-  return <div></div>;
+  const [chosenUser, setChosenUser] = useState<IUser | null>(null);
+  console.log(chosenUser);
+  return (
+    <div>
+      <SearchUser getChosenUser={setChosenUser} />
+    </div>
+  );
 };
