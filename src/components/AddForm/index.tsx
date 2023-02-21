@@ -7,6 +7,7 @@ import { IRocketErrors } from "@/models/rocket";
 import { UserPreview } from "../UserPreview";
 import { IAddFormProps } from "./types";
 import { RxCrossCircled } from "react-icons/rx";
+import { useStoreActions } from "@/store/hooks";
 
 export const AddForm: React.FC<IAddFormProps> = ({
   formData,
@@ -14,6 +15,7 @@ export const AddForm: React.FC<IAddFormProps> = ({
   additionalClass,
   modalStateSetter,
 }) => {
+  const { addUser } = useStoreActions((actions) => actions);
   const [formErrors, setFormErrors] = useState<IRocketErrors>({
     title: "",
     rocketName: "",
@@ -41,7 +43,8 @@ export const AddForm: React.FC<IAddFormProps> = ({
     }
     setFormErrors(newFormErrors);
     if (isValid) {
-      console.log(formData);
+      addUser(formData);
+      closeModalHandler();
     }
   };
 
@@ -62,6 +65,7 @@ export const AddForm: React.FC<IAddFormProps> = ({
 
     modalStateSetter(false);
   };
+
   return (
     <form
       onSubmit={onSubmit}

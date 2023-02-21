@@ -1,0 +1,48 @@
+.rocket {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 2px solid;
+  gap: 20px;
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
+  &__button {
+    background-color: transparent;
+  }
+
+  &__buttons-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+  }
+
+  &__description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+  }
+
+  &__github {
+    align-self: flex-end;
+  }
+}

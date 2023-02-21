@@ -1,11 +1,13 @@
-import { AddForm } from "@/components";
-import { IUser } from "@/models/response";
+import { AddForm, Rocket } from "@/components";
 import { IRocket } from "@/models/rocket";
+import { useStoreState } from "@/store/hooks";
 import styles from "@/styles/Home.module.scss";
 import { useState } from "react";
+import { RxPlusCircled } from "react-icons/rx";
 
 export default function Home() {
   const [isAddFormShown, setIsAddFormShown] = useState<boolean>(false);
+  const { users } = useStoreState((state) => state);
 
   const [formData, setFormData] = useState<IRocket>({
     title: "",
@@ -26,8 +28,18 @@ export default function Home() {
       />
       <header className={styles["header"]}>
         <h1 className={styles["header__title"]}>🚀 List of Rockets</h1>
-        <button onClick={() => setIsAddFormShown(true)}>+</button>
+        <button
+          onClick={() => setIsAddFormShown(true)}
+          className={styles["header__button"]}
+        >
+          <RxPlusCircled size="30px" />
+        </button>
       </header>
+      <div>
+        {users.map((e) => (
+          <Rocket {...e} />
+        ))}
+      </div>
     </>
   );
 }
