@@ -6,7 +6,9 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  gap: 30px;
   padding: 30px;
 
   &__header {
@@ -47,7 +49,7 @@
 
   &__submit {
     width: 150px;
-    height: 40px;
+    min-height: 40px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     background-color: #4c8a45;
@@ -55,5 +57,31 @@
     font-weight: bolder;
     border-radius: 10px;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .form {
+    &__heading {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .form {
+    &__search-user {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .form {
+    &__search-user {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      justify-items: start;
+    }
   }
 }

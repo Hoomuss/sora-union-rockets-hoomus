@@ -1,0 +1,56 @@
+@mixin button {
+  width: 70px;
+  height: 50px;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+  color: white;
+}
+
+.confirm {
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__text {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__submit {
+    @include button;
+    background-color: #4c8a45;
+  }
+  &__cancel {
+    @include button;
+    background-color: #d14949;
+  }
+}

@@ -18,3 +18,11 @@
     }
   }
 }
+
+@media screen and (max-width: 460px) {
+  .user-preview {
+    &__link-data {
+      display: none;
+    }
+  }
+}

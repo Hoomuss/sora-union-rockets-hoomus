@@ -20,7 +20,7 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
   const setQueryStringDebounce = useCallback(
     debounce((currentQueryString: string) => {
       setQueryString(currentQueryString);
-    }, 300),
+    }, 500),
     []
   );
 
@@ -31,7 +31,7 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
 
   useEffect(() => {
     if (queryString) {
-      requestItems(queryString).then((e) => {
+      requestItems("GET /search/users", queryString).then((e) => {
         if (e?.items) {
           setCurrentVariants(e.items);
         }
@@ -58,13 +58,14 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
       <span className={styles["input__error"]}>{errorString}</span>
       <div className={styles["input__variants-wrapper"]}>
         {currentVariants.map((e) => {
+          const { login, id } = e;
           return (
             <div
-              key={e.id}
+              key={id}
               onClick={() => chooseHandler(e)}
               className={styles["input__variant"]}
             >
-              {e.login}
+              {login}
             </div>
           );
         })}

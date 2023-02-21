@@ -8,12 +8,14 @@ export const store = createStore<IUsersModel>({
     state.users.push(payload);
   }),
   deleteUser: action((state, payload) => {
-    state.users = state.users.filter((e) => e.id !== payload);
+    state.users = state.users.filter((e) => {
+      return e.id !== payload;
+    });
   }),
   updateUser: action((state, payload) => {
     state.users = [
       ...state.users.filter((e) => e.id !== payload.id),
-      payload.newUser,
+      payload.newRocket,
     ];
   }),
 });

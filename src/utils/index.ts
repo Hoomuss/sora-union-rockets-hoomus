@@ -1,13 +1,13 @@
 import { Octokit } from "@octokit/core";
 import { AUTH_KEY } from "@/consts/index";
 
-export const requestItems = async (query: string) => {
+export const requestItems = async (request: string, query?: string) => {
   try {
     const octokit = new Octokit({
       auth: AUTH_KEY,
     });
 
-    return (await octokit.request("GET /search/users", { q: query })).data;
+    return (await octokit.request(request, { q: query })).data;
   } catch {
     return null;
   }
