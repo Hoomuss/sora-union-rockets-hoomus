@@ -1,0 +1,19 @@
+.input {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  &__input {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 10px 15px;
+    font-size: 20px;
+  }
+
+  &__error {
+    color: red;
+  }
+}

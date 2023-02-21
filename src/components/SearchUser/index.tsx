@@ -37,6 +37,12 @@ export const SearchUser: React.FC<ISearchUserProps> = ({ getChosenUser }) => {
     }
   }, [queryString]);
 
+  const chooseHandler = (e: IUser) => {
+    getChosenUser(e);
+    setCurrentQueryString("");
+    setQueryString("");
+  };
+
   return (
     <div className={styles["input"]}>
       <input
@@ -49,7 +55,7 @@ export const SearchUser: React.FC<ISearchUserProps> = ({ getChosenUser }) => {
           return (
             <div
               key={e.id}
-              onClick={() => getChosenUser(e)}
+              onClick={() => chooseHandler(e)}
               className={styles["input__variant"]}
             >
               {e.login}

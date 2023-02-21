@@ -1,8 +1,14 @@
-import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
-
+import { IUser } from "./response";
 export interface IRocket {
   title: string;
   rocketName: string;
   description: string;
-  userData: GetResponseDataTypeFromEndpointMethod.items;
+  userData: IUser | null;
+}
+
+export interface IRocketErrors {
+  title: string;
+  rocketName: string;
+  description: string;
+  userData: string;
 }
