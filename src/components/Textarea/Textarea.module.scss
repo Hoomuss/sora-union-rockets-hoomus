@@ -1,5 +1,5 @@
 .textarea {
-  height: 223px;
+  height: 203px;
   display: flex;
   padding-bottom: 3px;
   flex-direction: column;
@@ -11,10 +11,11 @@
     border: 2px solid black;
     padding: 10px 15px;
     font-size: 20px;
-    height: 200px;
+    height: 180px;
   }
 
   &__error {
-    color: red;
+    font-size: 16px;
+    color: #d14949;
   }
 }

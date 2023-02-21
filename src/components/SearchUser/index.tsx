@@ -4,7 +4,11 @@ import { debounce, requestItems } from "@/utils";
 import styles from "./SearchUser.module.scss";
 import { ISearchUserProps } from "./SearchUser";
 
-export const SearchUser: React.FC<ISearchUserProps> = ({ getChosenUser }) => {
+export const SearchUser: React.FC<ISearchUserProps> = ({
+  getChosenUser,
+  errorString,
+  ...rest
+}) => {
   const [currentQueryString, setCurrentQueryString] = useState<string>("");
   const [queryString, setQueryString] = useState<string>("");
   const [currentVariants, setCurrentVariants] = useState<IUser[]>([]);
@@ -49,7 +53,9 @@ export const SearchUser: React.FC<ISearchUserProps> = ({ getChosenUser }) => {
         value={currentQueryString}
         onChange={inputHandler}
         className={styles["input__input"]}
+        {...rest}
       />
+      <span className={styles["input__error"]}>{errorString}</span>
       <div className={styles["input__variants-wrapper"]}>
         {currentVariants.map((e) => {
           return (

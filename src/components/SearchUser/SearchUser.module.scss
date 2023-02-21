@@ -1,6 +1,12 @@
 .input {
   width: 100%;
   position: relative;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 3px;
+  font-family: Arial, Helvetica, sans-serif;
 
   &__input {
     width: 100%;
@@ -11,7 +17,13 @@
     font-size: 20px;
   }
 
+  &__error {
+    font-size: 16px;
+    color: #d14949;
+  }
+
   &__variants-wrapper {
+    margin-top: 47px;
     width: 100%;
     max-height: 300px;
     overflow-y: auto;
