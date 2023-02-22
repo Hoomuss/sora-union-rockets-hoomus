@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import styles from "./ConfirmDelete.module.scss";
 import { IConfirmDeleteProps } from "./types";
 
@@ -7,7 +8,13 @@ export const ConfirmDelete: React.FC<IConfirmDeleteProps> = ({
   title,
 }) => {
   return (
-    <div className={styles["confirm"]}>
+    <div
+      className={styles["confirm"]}
+      onClick={(e) => {
+        if (e.currentTarget != e.target) return;
+        setModal(false);
+      }}
+    >
       <div className={styles["confirm__content"]}>
         <div className={styles["confirm__text"]}>
           Do you really want to remove {title}

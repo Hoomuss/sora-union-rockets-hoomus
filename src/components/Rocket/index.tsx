@@ -5,12 +5,20 @@ import { useStoreActions } from "@/store/hooks";
 import { IRocketProps } from "./types";
 import { Modal } from "../Modal";
 import { ConfirmDelete } from "../ConfirmDelete";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Rocket: React.FC<IRocketProps> = ({ rocket, editRocket }) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const { deleteUser } = useStoreActions((actions) => actions);
   const { userData, title, id, rocketName, description } = rocket;
+
+  useEffect(() => {
+    if (isModalOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isModalOpened]);
   return (
     <>
       {isModalOpened && (
