@@ -17,7 +17,7 @@ export const ConfirmDelete: React.FC<IConfirmDeleteProps> = ({
     >
       <div className={styles["confirm__content"]}>
         <div className={styles["confirm__text"]}>
-          Do you really want to remove {title}
+          Do you really want to remove {title}?
         </div>
         <div className={styles["confirm__buttons"]}>
           <button

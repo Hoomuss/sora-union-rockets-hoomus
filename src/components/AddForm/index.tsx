@@ -79,7 +79,7 @@ export const AddForm: React.FC<IAddFormProps> = ({
   return (
     <form
       onSubmit={onSubmit}
-      className={styles["form"] + " " + additionalClass}
+      className={[styles["form"], additionalClass].filter((e) => !!e).join(" ")}
       {...rest}
     >
       <header className={styles["form__header"]}>

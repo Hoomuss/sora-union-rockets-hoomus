@@ -2,23 +2,24 @@ import { IUser } from "@/models/response";
 import { requestItems } from "@/utils";
 import React from "react";
 import { useEffect, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import styles from "./UserPreview.module.scss";
 
 const UserPreview: React.FC<IUser> = (user) => {
   const { login, avatar_url, html_url } = user;
-  const [followersCount, setFollowersCount] = useState<number>(0);
-  const [reposCount, setReposCount] = useState<number>(0);
+  const [reposCount, setReposCount] = useState<number | null>(null);
 
   useEffect(() => {
-    setReposCount(0);
-    setFollowersCount(0);
+    setReposCount(null);
+
     try {
-      requestItems(`GET /users/${login}/followers`).then((data) => {
-        setFollowersCount(data.length);
-      });
-      requestItems(`GET /users/${login}/repos`).then((data) => {
-        setReposCount(data.length);
-      });
+      requestItems(`GET /users/${login}/repos`, { per_page: "100" }).then(
+        (data) => {
+          if (data) {
+            setReposCount(data.length);
+          }
+        }
+      );
     } catch {}
   }, [user]);
 
@@ -29,17 +30,28 @@ const UserPreview: React.FC<IUser> = (user) => {
         alt="avatar"
         src={avatar_url}
       />
-      <a href={html_url} className={styles["user-preview__link"]}>
+      <a
+        href={html_url}
+        className={styles["user-preview__link"]}
+        target="_blank"
+      >
         {login}{" "}
         <span className={styles["user-preview__link-data"]}>
-          {" "}
-          {!!followersCount && !!reposCount && (
+          {reposCount !== null ? (
             <>
-              ({reposCount}
-              {reposCount === 1 ? "repository" : "repositories"},{" "}
-              {followersCount}
-              {followersCount === 1 ? "follower" : "followers"})
+              ({reposCount === 100 ? "more then " : ""}
+              {reposCount} {reposCount === 1 ? "repository" : "repositories"})
             </>
+          ) : (
+            <ThreeDots
+              height="40"
+              width="40"
+              color="#fa7d00"
+              ariaLabel="line-wave"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
           )}
         </span>
       </a>

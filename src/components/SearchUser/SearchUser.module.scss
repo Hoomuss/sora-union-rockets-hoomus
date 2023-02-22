@@ -15,6 +15,11 @@
     padding: 10px 15px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+    transition: border 0.3s;
+
+    &-error {
+      border: 2px solid #d14949;
+    }
   }
 
   &__error {

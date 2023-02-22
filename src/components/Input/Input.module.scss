@@ -11,6 +11,11 @@
     border: 2px solid black;
     padding: 10px 15px;
     font-size: 20px;
+    transition: border 0.3s;
+
+    &-error {
+      border: 2px solid #d14949;
+    }
   }
 
   &__error {

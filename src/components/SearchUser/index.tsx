@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IUser } from "@/models/response";
 import { debounce, requestItems } from "@/utils";
 import styles from "./SearchUser.module.scss";
@@ -13,6 +13,21 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
   const [queryString, setQueryString] = useState<string>("");
   const [currentVariants, setCurrentVariants] = useState<IUser[]>([]);
 
+  const input = useRef<HTMLDivElement | null>(null);
+  const closeInput = (e: Event) => {
+    if (!input.current?.contains(e.target as Document)) {
+      setCurrentVariants([]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", closeInput);
+
+    return () => {
+      document.removeEventListener("click", closeInput);
+    };
+  }, []);
+
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentQueryString(e.target.value);
   };
@@ -26,12 +41,12 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
 
   useEffect(
     () => setQueryStringDebounce(currentQueryString),
-    [currentQueryString]
+    [currentQueryString, queryString]
   );
 
   useEffect(() => {
     if (queryString) {
-      requestItems("GET /search/users", queryString).then((e) => {
+      requestItems("GET /search/users", { q: queryString }).then((e) => {
         if (e?.items) {
           setCurrentVariants(e.items);
         }
@@ -48,11 +63,16 @@ export const SearchUser: React.FC<ISearchUserProps> = ({
   };
 
   return (
-    <div className={styles["input"]}>
+    <div className={styles["input"]} ref={input}>
       <input
         value={currentQueryString}
         onChange={inputHandler}
-        className={styles["input__input"]}
+        className={[
+          styles["input__input"],
+          !!errorString && styles["input__input-error"],
+        ]
+          .filter((e) => !!e)
+          .join(" ")}
         {...rest}
       />
       <span className={styles["input__error"]}>{errorString}</span>

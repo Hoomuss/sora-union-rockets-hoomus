@@ -7,7 +7,15 @@ export const TextArea: React.FC<ITextareaProps> = ({
 }) => {
   return (
     <div className={styles["textarea"]}>
-      <textarea className={styles["textarea__textarea"]} {...rest} />
+      <textarea
+        className={[
+          styles["textarea__textarea"],
+          !!errorString && styles["textarea__textarea-error"],
+        ]
+          .filter((e) => !!e)
+          .join(" ")}
+        {...rest}
+      />
       <span className={styles["textarea__error"]}>{errorString}</span>
     </div>
   );

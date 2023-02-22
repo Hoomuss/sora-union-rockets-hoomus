@@ -67,12 +67,14 @@ export default function Home() {
                 <Rocket editRocket={editRocket} rocket={e} />
               </CSSTransition>
             ))}
+          {!users.length && (
+            <CSSTransition key={"no-items"} timeout={500} classNames="item">
+              <div className={styles["items-wrapper__no-items"]}>
+                <div>No rockets yet ⛔</div>
+              </div>
+            </CSSTransition>
+          )}
         </TransitionGroup>
-        {!users.length && (
-          <div className={styles["items-wrapper__no-items"]}>
-            <div>No rockets yet ⛔</div>
-          </div>
-        )}
       </div>
     </>
   );
